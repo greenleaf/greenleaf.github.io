@@ -734,6 +734,113 @@ body {
   .reviews-grid { grid-template-columns: 1fr; }
 }
 
+/* ── CASE SEARCH WIDGET ── */
+.case-search-section {
+  background: var(--white);
+  padding: 4rem 2rem 3.5rem;
+  border-top: 1px solid var(--border);
+}
+.case-search-inner {
+  max-width: 860px;
+  margin: 0 auto;
+  text-align: center;
+}
+.case-search-heading {
+  font-family: 'Mulish', sans-serif;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 0.8rem;
+  line-height: 1.3;
+}
+.case-search-heading em {
+  font-style: normal;
+  color: var(--sage-dkr);
+}
+.case-search-sub {
+  font-size: 14.5px;
+  font-weight: 500;
+  color: var(--text-md);
+  max-width: 46ch;
+  margin: 0 auto 1.75rem;
+  line-height: 1.65;
+}
+.case-search-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  max-width: 560px;
+  margin: 0 auto 1.25rem;
+  background: var(--cream-md);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  padding: 6px 8px 6px 20px;
+}
+.case-search-box svg {
+  flex-shrink: 0;
+  opacity: 0.5;
+}
+.case-search-box input {
+  border: none;
+  background: transparent;
+  outline: none;
+  flex: 1;
+  min-width: 0;
+  font-family: 'Mulish', sans-serif;
+  font-size: 14.5px;
+  font-weight: 500;
+  color: var(--text);
+  padding: 10px 0;
+}
+.case-search-box input::placeholder {
+  color: var(--text-lt);
+  font-weight: 400;
+}
+.case-search-btn {
+  flex-shrink: 0;
+  background: #EB7055;
+  color: var(--white);
+  border: none;
+  border-radius: 100px;
+  padding: 11px 22px;
+  font-family: 'Mulish', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s;
+  white-space: nowrap;
+}
+.case-search-btn:hover { background: #d95e42; }
+.case-search-chips {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+.case-chip {
+  font-family: 'Mulish', sans-serif;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--text-md);
+  background: var(--cream-md);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  padding: 7px 16px;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.case-chip:hover {
+  background: var(--sage);
+  border-color: var(--sage-dk);
+  color: var(--text);
+}
+@media (max-width: 640px) {
+  .case-search-section { padding: 3rem 1.25rem 2.5rem; }
+  .case-search-box { flex-wrap: wrap; border-radius: 20px; padding: 14px 18px; }
+  .case-search-box input { width: 100%; padding: 4px 0; }
+  .case-search-btn { width: 100%; }
+}
+
 /* ── FEATURED CONTENT ── */
 .featured-section {
   background: var(--white);
@@ -913,18 +1020,9 @@ body {
   <div class="main">
 
     <div class="section">
-      <div class="sec-label">Background</div>
-      <h2 class="sec-heading">A shift in perspective —<br><em>from society to the individual</em></h2>
-      <p class="body-text">Dr. Na grew up in Korea, where he studied journalism at one of the country's oldest universities — a place where classical Eastern texts were still part of the curriculum. That background gave him an unusual foundation: a fluency with classical Eastern thought rarely found in clinical training.</p>
-      <p class="body-text">After military service, he spent a year in Vancouver with extended family. His uncle — a Korean medicine doctor — introduced him to acupuncture and herbal medicine. Something shifted. He'd been thinking about health as a collective, societal concern; now he began to see it as something deeply personal — belonging to each individual.</p>
-      <p class="body-text">What he found in his studies surprised him. Classical texts were being mistranslated into English — not out of bad faith, but because the conceptual gap between Eastern and Western medicine is genuinely wide. Bridging that gap became his work: not by simplifying Eastern medicine, but by explaining it in ways that actually make sense to patients encountering it for the first time.</p>
-    </div>
-
-    <hr class="divider">
-
-    <div class="section">
       <div class="sec-label">Practice</div>
       <h2 class="sec-heading">A different angle on a problem<br><em>that hasn't been solved yet</em></h2>
+      <p class="body-text">Early in his training, Dr. Na noticed a recurring problem: classical Eastern medicine texts were routinely mistranslated into English — not out of carelessness, but because the gap between Eastern and Western medical thinking runs genuinely deep. Closing that gap without dumbing anything down became the starting point for how he practices today.</p>
       <p class="body-text">Dr. Na founded Greenleaf Clinic in 2007. Over nearly two decades and more than 7,000 patients, he has treated conditions ranging from chronic pain and anxiety to digestive disorders, skin conditions, fertility challenges, and post-cancer treatment recovery — including infertility he faced personally, which deepened both his research and his understanding of patients navigating that path.</p>
       <p class="body-text">Most patients arriving at Greenleaf have already been through the Western medical system — tests, specialists, medications. They're not looking for someone to dismiss what they've been through. They're looking for a different angle on a problem that hasn't been solved yet. That's what this practice offers.</p>
       <p class="body-text">His approach is direct. He asks a lot of questions, explains what he observes, and sets realistic expectations. He doesn't recommend more treatments than are necessary.</p>
@@ -1038,18 +1136,9 @@ body {
   <div class="main">
 
     <div class="section">
-      <div class="sec-label">소개</div>
-      <h2 class="sec-heading">관점의 전환 — <em>사회에서 개인으로</em></h2>
-      <p class="body-text">성균관대학교 신문방송학과를 졸업했습니다. 유학사상의 이해가 필수 과목인 학교에서 동양 고전을 접할 수 있었고, 그 경험은 훗날 한의학을 배우는 데 예상치 못한 자산이 됐습니다.</p>
-      <p class="body-text">군 복무를 마친 후 밴쿠버에서 1년을 보내며 한의사이신 고모부의 권유로 한의학에 관심을 갖게 됐습니다. 무언가가 바뀌는 순간이었습니다. 그때까지 '사회 전체의 건강'을 고민하던 시선이 '개인의 건강' 으로 옮겨가기 시작했습니다.</p>
-      <p class="body-text">공부를 시작하면서 한의학 영어 번역서 상당수가 잘못 옮겨져 있다는 것을 발견했습니다. 동서양 의학 사이의 개념적 간격이 워낙 크기 때문이었습니다. 한의학을 처음 접하는 분들이 오해 없이 이해하고 선택할 수 있도록 제대로 설명하는 것 — 그것이 오랜 사명이 됐습니다.</p>
-    </div>
-
-    <hr class="divider">
-
-    <div class="section">
       <div class="sec-label">진료 철학</div>
       <h2 class="sec-heading">지금까지 보지 못했던 <em>다른 각도</em>에서</h2>
+      <p class="body-text">한의학을 공부하던 초반, 많은 고전 문헌이 영어로 잘못 번역돼 있다는 걸 발견했습니다. 동서양 의학 사이의 개념적 간격이 워낙 컸기 때문입니다. 내용을 가볍게 만들지 않으면서도 제대로 이해할 수 있게 설명하는 것 — 그것이 지금 진료의 출발점이 됐습니다.</p>
       <p class="body-text">2007년 Greenleaf 한의원을 설립했습니다. 지난 20년 가까이 7,500명 이상의 환자를 치료하며 통증, 정신건강, 소화기 질환, 피부 질환, 난임, 항암 후유증 치료에 이르기까지 폭넓은 분야를 다뤄왔습니다. 특히 스스로 난임을 경험한 후 그 치료와 연구에 더 깊이 매달리게 됐습니다. 환자의 자리에 서 있어 본 의사가 다르게 볼 수 있는 것들이 있었습니다.</p>
       <p class="body-text">한의원을 찾는 분들 중 많은 분들이 이미 양방 병원을 여러 군데 다녀보신 상태입니다. 한의사가 하는 일은 그 여정을 무시하는 것이 아니라, 지금까지 보지 못했던 <em>다른 각도</em>에서 문제를 들여다보는 것입니다.</p>
       <p class="body-text">많이 묻고, 여러 곳을 촉진합니다. 진단 내용을 자세히 설명하고, 가능한 치료 방법과 치료후 효과를 말씀드립니다. 필요 이상의 진료를 권하지 않습니다.</p>
@@ -1127,6 +1216,30 @@ body {
 
   
 </div>
+
+<section class="case-search-section" id="caseSearchSection">
+  <div class="case-search-inner">
+    <h2 class="case-search-heading">You're probably not the <em>first</em> person with this problem.</h2>
+    <p class="case-search-sub">See how people with symptoms like yours were treated — and how long it took to feel better.</p>
+    <form class="case-search-box" action="https://greenleaf.github.io/greenleaf-case-reports-en/index.html" method="GET">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" name="q" placeholder="Try a symptom — e.g. insomnia, back pain, digestion">
+      <button type="submit" class="case-search-btn">Search Cases</button>
+    </form>
+    <div class="case-search-chips">
+      <a class="case-chip" href="https://greenleaf.github.io/greenleaf-case-reports-en/index.html?cat=Mental%20Health">Mental Health</a>
+      <a class="case-chip" href="https://greenleaf.github.io/greenleaf-case-reports-en/index.html?cat=Fertility">Fertility</a>
+      <a class="case-chip" href="https://greenleaf.github.io/greenleaf-case-reports-en/index.html?cat=Uterine%20Conditions">Uterine Conditions</a>
+      <a class="case-chip" href="https://greenleaf.github.io/greenleaf-case-reports-en/index.html?cat=Pain">Pain</a>
+      <a class="case-chip" href="https://greenleaf.github.io/greenleaf-case-reports-en/index.html?cat=Digestive%20Issues">Digestive Issues</a>
+      <a class="case-chip" href="https://greenleaf.github.io/greenleaf-case-reports-en/index.html?cat=Men%27s%20Health">Men's Health</a>
+      <a class="case-chip" href="https://greenleaf.github.io/greenleaf-case-reports-en/index.html?cat=Skin%20Conditions">Skin Conditions</a>
+      <a class="case-chip" href="https://greenleaf.github.io/greenleaf-case-reports-en/index.html?cat=Pediatrics">Pediatrics</a>
+      <a class="case-chip" href="https://greenleaf.github.io/greenleaf-case-reports-en/index.html?cat=Cancer%20%26%20Chemotherapy">Cancer &amp; Chemotherapy</a>
+      <a class="case-chip" href="https://greenleaf.github.io/greenleaf-case-reports-en/index.html?cat=ENT%20%28Ear%2C%20Nose%20%26%20Throat%29">ENT</a>
+    </div>
+  </div>
+</section>
 
 <section class="reviews-section">
     <div class="reviews-inner">
@@ -1263,6 +1376,7 @@ body {
   function go(lang, btn) {
     document.getElementById('en').classList.toggle('hidden', lang !== 'en');
     document.getElementById('kr').classList.toggle('hidden', lang !== 'kr');
+    document.getElementById('caseSearchSection').classList.toggle('hidden', lang !== 'en');
     document.querySelectorAll('.lb').forEach(function(b) { b.classList.remove('on'); });
     btn.classList.add('on');
     // restart counters on lang switch
