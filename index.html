@@ -833,6 +833,17 @@ body {
   border-color: var(--sage-dk);
   color: var(--text);
 }
+.case-chip-count {
+  font-weight: 400;
+  color: var(--text-lt);
+  margin-left: 3px;
+}
+.case-chip-count:empty {
+  margin-left: 0;
+}
+.case-chip:hover .case-chip-count {
+  color: var(--text-md);
+}
 @media (max-width: 640px) {
   .case-search-section { padding: 3rem 1.25rem 2.5rem; }
   .case-search-box { flex-wrap: wrap; border-radius: 20px; padding: 14px 18px; }
@@ -1243,17 +1254,18 @@ body {
       <button type="submit" class="case-search-btn">Search Cases</button>
     </form>
     <div class="case-search-chips">
-      <a class="case-chip" href="https://greenleaf.github.io/greenleaf-case-reports-en/index.html?cat=Mental%20Health">Mental Health</a>
-      <a class="case-chip" href="https://greenleaf.github.io/greenleaf-case-reports-en/index.html?cat=Fertility">Fertility</a>
-      <a class="case-chip" href="https://greenleaf.github.io/greenleaf-case-reports-en/index.html?cat=Uterine%20Conditions">Uterine Conditions</a>
-      <a class="case-chip" href="https://greenleaf.github.io/greenleaf-case-reports-en/index.html?cat=Pain">Pain</a>
-      <a class="case-chip" href="https://greenleaf.github.io/greenleaf-case-reports-en/index.html?cat=Digestive%20Issues">Digestive Issues</a>
-      <a class="case-chip" href="https://greenleaf.github.io/greenleaf-case-reports-en/index.html?cat=Men%27s%20Health">Men's Health</a>
-      <a class="case-chip" href="https://greenleaf.github.io/greenleaf-case-reports-en/index.html?cat=Skin%20Conditions">Skin Conditions</a>
-      <a class="case-chip" href="https://greenleaf.github.io/greenleaf-case-reports-en/index.html?cat=Pediatrics">Pediatrics</a>
-      <a class="case-chip" href="https://greenleaf.github.io/greenleaf-case-reports-en/index.html?cat=Cancer%20%26%20Chemotherapy">Cancer &amp; Chemotherapy</a>
-      <a class="case-chip" href="https://greenleaf.github.io/greenleaf-case-reports-en/index.html?cat=ENT%20%28Ear%2C%20Nose%20%26%20Throat%29">ENT</a>
+      <a class="case-chip" data-cat="Mental Health" href="https://greenleaf.github.io/greenleaf-case-reports-en/index.html?cat=Mental%20Health">Mental Health<span class="case-chip-count"></span></a>
+      <a class="case-chip" data-cat="Fertility" href="https://greenleaf.github.io/greenleaf-case-reports-en/index.html?cat=Fertility">Fertility<span class="case-chip-count"></span></a>
+      <a class="case-chip" data-cat="Uterine Conditions" href="https://greenleaf.github.io/greenleaf-case-reports-en/index.html?cat=Uterine%20Conditions">Uterine Conditions<span class="case-chip-count"></span></a>
+      <a class="case-chip" data-cat="Pain" href="https://greenleaf.github.io/greenleaf-case-reports-en/index.html?cat=Pain">Pain<span class="case-chip-count"></span></a>
+      <a class="case-chip" data-cat="Digestive Issues" href="https://greenleaf.github.io/greenleaf-case-reports-en/index.html?cat=Digestive%20Issues">Digestive Issues<span class="case-chip-count"></span></a>
+      <a class="case-chip" data-cat="Men's Health" href="https://greenleaf.github.io/greenleaf-case-reports-en/index.html?cat=Men%27s%20Health">Men's Health<span class="case-chip-count"></span></a>
+      <a class="case-chip" data-cat="Skin Conditions" href="https://greenleaf.github.io/greenleaf-case-reports-en/index.html?cat=Skin%20Conditions">Skin Conditions<span class="case-chip-count"></span></a>
+      <a class="case-chip" data-cat="Pediatrics" href="https://greenleaf.github.io/greenleaf-case-reports-en/index.html?cat=Pediatrics">Pediatrics<span class="case-chip-count"></span></a>
+      <a class="case-chip" data-cat="Cancer & Chemotherapy" href="https://greenleaf.github.io/greenleaf-case-reports-en/index.html?cat=Cancer%20%26%20Chemotherapy">Cancer &amp; Chemotherapy<span class="case-chip-count"></span></a>
+      <a class="case-chip" data-cat="ENT|ENT (Ear, Nose & Throat)" href="https://greenleaf.github.io/greenleaf-case-reports-en/index.html?cat=ENT%20%28Ear%2C%20Nose%20%26%20Throat%29">ENT<span class="case-chip-count"></span></a>
     </div>
+    <p class="case-chip-loaderr" id="caseChipLoadErr" style="display:none;font-size:11px;color:var(--text-lt);text-align:center;margin-top:10px;">Case counts unavailable right now — the links still work.</p>
   </div>
 </section>
 
@@ -1387,6 +1399,39 @@ body {
   </footer>
 
 </div>
+
+<script>
+  (function() {
+    var CASES_URL = 'https://greenleaf.github.io/greenleaf-case-reports-en/cases.json';
+    fetch(CASES_URL)
+      .then(function(res) {
+        if (!res.ok) throw new Error('bad response');
+        return res.json();
+      })
+      .then(function(cases) {
+        var counts = {};
+        cases.forEach(function(c) {
+          var cats = Array.isArray(c.cat) ? c.cat : [c.cat];
+          cats.forEach(function(cat) {
+            if (!cat) return;
+            counts[cat] = (counts[cat] || 0) + 1;
+          });
+        });
+        document.querySelectorAll('.case-chip[data-cat]').forEach(function(chip) {
+          var aliases = chip.getAttribute('data-cat').split('|');
+          var total = aliases.reduce(function(sum, alias) {
+            return sum + (counts[alias] || 0);
+          }, 0);
+          var countEl = chip.querySelector('.case-chip-count');
+          if (countEl && total > 0) countEl.textContent = total;
+        });
+      })
+      .catch(function() {
+        var err = document.getElementById('caseChipLoadErr');
+        if (err) err.style.display = 'block';
+      });
+  })();
+</script>
 
 <script>
   function go(lang, btn) {
